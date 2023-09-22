@@ -1,9 +1,6 @@
 #include "words.hpp"
 
 void run(){
-    
-    
-
 
     //obter as palavras que irão ser trabalhadas 
     vector<string> palavras;
@@ -165,7 +162,6 @@ void obterHash(vector<unordered_map<string, int>>& wordFrequence, vector<string>
         ifstream file("dataset/input" + to_string(i) + ".txt");
 
         if (!file.is_open()) {
-            cout << "parou no " << i << endl;
             break;
         }
 

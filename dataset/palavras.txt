@@ -1,5 +1,7 @@
 palavra 
 árvore 
+papel
+história
+filosofia
+estudo
 dúvidas
-
-

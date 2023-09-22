@@ -334,10 +334,14 @@ for(int i=0;i<palavras.size();i++){
 As árvores utilizadas nesse trabalho foram construídas a partir do resultado que a heap apresentou quando aplicada em relação à análise de uma palavra do vetor `palavras` em relação a um dos textos.
 Vale ressaltar que as árvores utilizadas foram:
 `Árvore Binária de Busca`, `Árvore AVL` e `Árvore de Huffman`.
+As propriedades de cada uma delas e seu comportamento assintótico são especificados a seguir.
 
 ## Árvore Binária
 
 Uma **árvore binária** é uma estrutura de dados  que consiste em um conjunto de nós, onde cada nó pode ter no máximo dois filhos: um à esquerda e outro à direita. Essa estrutura é frequentemente usada para organizar dados de forma hierárquica, facilitando operações como busca, inserção e remoção de elementos por classificar os dados de acordo com o seu valor.
+Dados são inseridos e buscados sempre seguindo a regra de que elementos maiores estão à direita e menores à esquerda, seguindo o caminhamento nos nós filhos , como mostra o gif:
+
+<img src="imagem/image11.gif" alt="binarytree" style="max-width: 50%; height: auto;">
 
 ### Funções Implementadas
 
@@ -443,12 +447,141 @@ Esta função é usada para liberar a memória alocada para a árvore de Huffman
 - A função `destroyHuffmanTree()` também percorre todos os nós da árvore uma vez, resultando em um custo computacional de O(n), onde 'n' é o número de nós na árvore.
 
 
-# Saída e exemplo de uso
+# Saída e Análise de Resultado
 
 A saída consiste em um arquivo `output.txt` que é gerado após a execução do algoritmo.
-Esse arquivo apresenta cada uma das 3 árvores realativas a cada palavra em relação a cada texto de input 
-O tamanho desse arquivo vai depender do tamanho da entrada 
+Esse arquivo apresenta cada uma das 3 árvores relativas a cada palavra em relação a cada texto de input. 
+O tamanho desse arquivo vai depender do tamanho da entrada.
 
+## Exemplo 
+A lista de palavras que vão ser analisadas no algoritmo estão no arquivo [palavras.txt](dataset/palavras.txt) como mostra 
+
+![palavras.png](imagem/palavras.png)
+
+E os textos dos analisados serão os textos de dos arquivos de `input`:
+
+![inpurts.png](imagem/inpurts.png)
+
+A saída para a palavra `palavra` analisando somente o texto 0 foi:
+
+```
+PALAVRA 0: palavra
+
+Texto 0(palavra)
+
+ÁRVORE BINÁRIA(inorder): 
+às: 95
+vista: 96
+mas: 96
+imanente: 104
+sentido: 110
+segundo: 114
+sobre: 114
+sistema: 115
+pensamento: 115
+priori: 125
+entre: 127
+modo: 129
+mais: 133
+mundo: 134
+condição: 134
+sujeito: 145
+teoria: 176
+à: 230
+nos: 266
+não: 457
+
+ÁRVORE AVL(inorder): 
+às: 95
+mas: 96
+vista: 96
+imanente: 104
+sentido: 110
+segundo: 114
+sobre: 114
+pensamento: 115
+sistema: 115
+priori: 125
+entre: 127
+modo: 129
+mais: 133
+condição: 134
+mundo: 134
+sujeito: 145
+teoria: 176
+à: 230
+nos: 266
+não: 457
+
+ÁRVORE DE HUFFMAN:
+nos: 266
+mais: 133
+mundo: 134
+condição: 134
+sujeito: 145
+teoria: 176
+às: 95
+vista: 96
+mas: 96
+imanente: 104
+sentido: 110
+sobre: 114
+não: 457
+segundo: 114
+pensamento: 115
+à: 230
+sistema: 115
+priori: 125
+entre: 127
+modo: 129
+
+```
+
+Para a palavra `àrvore` foi:
+
+```
+PALAVRA 1: árvore
+
+Texto 0(árvore)
+Palavra: árvore não está presente no texto 0
+
+Texto 1(árvore)
+Palavra: árvore não está presente no texto 1
+```
+
+Como a palavra não está presente no texto, as árvores não são impressas.
+
+É preciso salientar que as árvores estão sendo impressas inorder.
+
+Como apresentado, as árvores apresentam resultados diferentes devido aos seus critérios de implementação distintos.
+
+# CONCLUSÃO
+
+Como foi apresentado estruturas básicas utilizadas na implementação foram a hash (unordered_map), a heap e as árvores: Binária, AVL e Huffman.
+
+Como foi mostrado no trabalho anterior, a combinação da hash e da heap para a extração dos elementos mais frequentes em um texto é uma estratégia altamente eficiente pelo custo assintótico logarítmico (`O(n log k)`) de operações na heap. Lembrando que k é o número que representa a quantidade de elementos mais frequentes da qual desejamos obter. Além disso,a hash apresenta uma forma excelente de contagem das palavras.
+
+A novidade em relação ao trabalho anterior é apresentada com a criação das árvores partindo da estrutura formada pela heap. As árvores mantém o custo assintótico logarítmico (`O(log n)`) em suas operações, exceto para as impressões que apresentam um comportamento linear (`O(n)`). Isso acontece pela característica que as árvores binárias apresentam de serem constituídas por nós que apontam para outros nós à direita e à esquerda, permitindo uma característica de divisão para distribuir melhor os dados dos quis ela armazena. Embora essas informações de custo sejam de extrema importância para a análise do algoritmo, o mais importante a se analisar nesse trabalho é a diferença de implementação e comportamento de cada árvore.
+
+É possível perceber que de forma genérica as árvores: binária e AVL podem ser representadas por custos médios próximos. Entretanto, a árvore AVL apresenta balanceamentos para garantir um desempenho de busca que uma árvore binária poderia perder no caso de uma distribuição desbalanceada de dados. Por isso, a AVL implementa as rotações que garantem a eficiência de suas operações em relação às árvores binárias.
+
+Além disso, é possível observar que a implementação de uma árvore binária com algoritmo de Huffman apresenta uma compressão de dados com base na frequência das palavras, apresentando outra caracterísitca distinta de uma árvore binária padrão.
+
+Portanto, esta implementação consiste em uma base de estruturas para a construção de um sistema de sugestões de palavras e autocompletar. 
+
+
+
+# BIBLIOTECAS UTILIZADAS:
+
+
+| Biblioteca           | Descrição                                                   |
+|----------------------|-------------------------------------------------------------|
+| `<fstream>`          | A biblioteca `<fstream>` em C++ fornece funcionalidades para entrada e saída de arquivos. Permite a leitura e escrita de dados em arquivos no sistema de arquivos.                            |
+| `<unordered_map>`    | A biblioteca `<unordered_map>` em C++ é uma implementação da estrutura de dados de tabela de hash, que permite armazenar pares chave-valor.     |
+| `<vector>`           | A biblioteca `<vector>` em C++ implementa uma estrutura de dados de vetor dinâmico, que é uma coleção de elementos com tamanho dinâmico que pode crescer à medida que novos elementos são adicionados.           |
+| `<sstream>`          | A biblioteca `<sstream>` em C++ fornece funcionalidades para manipular strings como fluxos de entrada e saída. Isso é útil para converter entre tipos de dados e strings, além de fazer a formatação de saída.         |
+
+Você pode usar essa tabela diretamente 
 
 # Compilação e execução
 
@@ -481,6 +614,8 @@ TechTudo. O que é hash?. Disponível em: https://www.techtudo.com.br/noticias/2
 Stack Overflow. What is the default hash function used in C++ std::unordered_map?. Disponível em: https://stackoverflow.com/questions/19411742/what-is-the-default-hash-function-used-in-c-stdunordered-map.
 
 GeeksforGeeks. Binary Heap. Disponível em: https://www.geeksforgeeks.org/binary-heap/.
+
+Gaspar, W. Como imprimir uma árvore binária balanceada (árvore AVL). Disponível em: https://wagnergaspar.com/como-imprimir-uma-arvore-binaria-balanceada-arvore-avl/. 
 
 # Autor
 

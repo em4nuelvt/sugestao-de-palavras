@@ -6,7 +6,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <unordered_set>
 #include <unordered_map>
 
 #define K 20
