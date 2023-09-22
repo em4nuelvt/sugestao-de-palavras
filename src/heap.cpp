@@ -1,6 +1,5 @@
 #include "heap.hpp"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 Heap* createHeap(int capacity) {
     Heap* heap = (Heap*)malloc(sizeof(Heap));
@@ -85,9 +84,8 @@ void printHeap(Heap* heap) {
     destroyHeap(heapCopy); 
 }
 
-void printHeapUnsorted(Heap* heap) {
+void printHeapUnsorted(Heap* heap, std::ofstream &print) {
     for (int i = 1; i <= heap->size; i++) {
-        printf("%s: %d\n", heap->heap[i].word, heap->heap[i].frequency);
+        print<<heap->heap[i].word<<":"<<heap->heap[i].frequency<<endl;
     }
 }
-

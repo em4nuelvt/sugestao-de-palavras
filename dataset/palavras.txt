@@ -4,3 +4,4 @@ papel
 história
 filosofia
 estudo
+dúvidas

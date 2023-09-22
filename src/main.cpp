@@ -1,4 +1,4 @@
-#include "load.hpp"
+#include "tratamento.hpp"
 #include "words.hpp"
 
 int main(){

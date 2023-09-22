@@ -1,19 +1,9 @@
-#include "load.hpp"
+#include "tratamento.hpp"
 
-
-//lê os arquivos e inicializa a execução
-
-void printMap(unordered_map<string, int> &wordFrequence){
-    ofstream ouputFile("dataset/output.txt");
-
-    for (const auto &pair : wordFrequence) {
-        ouputFile << pair.first << ": " << pair.second << endl;
-    }
-}
 
 void trataPalavra(string &palavra){
+    lowerString(palavra);   
     palavra=removePunctuation(palavra);
-    lowerString(palavra);    
 }
 
 void lowerString(string &palavra){
@@ -21,21 +11,6 @@ void lowerString(string &palavra){
        palavra[i]=tolower(palavra[i]); 
     }
 }
-
-void lerStopwords(unordered_set <string> &stopwords){
-    ifstream arquivo;
-    arquivo.open("dataset/stopwords.txt");
-
-    string palavra;
-
-    while(!arquivo.fail()){
-        arquivo>>palavra;
-        lowerString(palavra);
-        stopwords.insert(palavra);
-    }
-
-}
-
 
 
 string removePunctuation(string word) {
@@ -67,21 +42,3 @@ string removePunctuation(string word) {
     return cleanedWord;
 }
 
-void readMultiple(){
-    ifstream file;
-    string palavra;
-    int aux =0;
-    file.open("dataset/input"+ to_string(aux)+".txt");
-    do{
-        aux++;
-        while(true){
-            file>>palavra;
-            if(file.fail())
-                break;
-            cout<<palavra<<" ";
-        }
-        file.close();
-        file.open("dataset/input"+ to_string(aux)+".txt");
-    }while(file);
-
-}
