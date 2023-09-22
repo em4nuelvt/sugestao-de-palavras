@@ -1,14 +1,16 @@
 #include "words.hpp"
 
 void run(){
-    vector<string> palavras;
-    vector<string> stopwords;
+    
+    
 
 
     //obter as palavras que irão ser trabalhadas 
+    vector<string> palavras;
     readWords(palavras);
 
     //obter as stopwords
+    vector<string> stopwords;
     readStopWords(stopwords);
 
     
@@ -160,7 +162,7 @@ void obterHash(vector<unordered_map<string, int>>& wordFrequence, vector<string>
     while (true) {
         unordered_map<string, int> auxHash; // Crie uma nova tabela hash para cada arquivo
 
-        ifstream file("dataset/texto" + to_string(i) + ".txt");
+        ifstream file("dataset/input" + to_string(i) + ".txt");
 
         if (!file.is_open()) {
             cout << "parou no " << i << endl;

@@ -40,12 +40,12 @@ void printHuffmanTree(HuffmanNode* root, std::ofstream& print) {
     if (root == nullptr) {
         return;
     }
-
+    printHuffmanTree(root->left, print);
     if (root->word != nullptr) {
         print<< root->word << ": " << root->frequency << endl;
     }
 
-    printHuffmanTree(root->left, print);
+    
     printHuffmanTree(root->right, print);
 }
 
