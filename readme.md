@@ -345,12 +345,10 @@ Dados são inseridos e buscados sempre seguindo a regra de que elementos maiores
 
 ### Funções Implementadas
 
-#### `treeNode* inserir(treeNode* raiz, string palavra, int frequencia)`
-
+* `treeNode* inserir(treeNode* raiz, string palavra, int frequencia)`
 Esta função permite a inserção de um novo nó em uma árvore binária. Ela recebe como argumento a raiz da árvore, uma palavra e sua frequência. O novo nó é inserido na posição apropriada da árvore de acordo com a frequência da palavra, seguindo as propriedades de uma árvore binária de busca (nós menores à esquerda e nós maiores à direita).
 
-#### `void imprimir(treeNode* raiz, std::ofstream &print)`
-
+* `void imprimir(treeNode* raiz, std::ofstream &print)`
 Esta função realiza um percurso na árvore binária, chamado de **in-order traversal**, que imprime os nós em ordem crescente com base nas frequências. Para cada nó, imprime a palavra e sua frequência.
 
 ### Custo Computacional
@@ -367,44 +365,38 @@ Uma **árvore AVL** é uma variação da árvore binária de busca que mantém o
 
 ### Funções Implementadas
 
-#### `No* novoNo(string palavra, int frequencia)`
-
+* `No* novoNo(string palavra, int frequencia)`
 Esta função cria e retorna um novo nó com uma palavra e sua frequência. O nó é inicializado com ponteiros para os filhos esquerdo e direito como nulo (vazio) e altura inicializada como 0.
 
-#### `short maior(short a, short b)`
-
+* `short maior(short a, short b)`
 Uma função auxiliar que retorna o maior valor entre dois valores inteiros curtos.
 
-#### `short alturaDoNo(No *no)`
-
+* `short alturaDoNo(No *no)`
 Calcula e retorna a altura de um nó ou -1 se o nó for nulo.
 
-#### `short fatorDeBalanceamento(No *no)`
+* `short fatorDeBalanceamento(No *no)`
 
 Calcula e retorna o fator de balanceamento de um nó, que é a diferença entre a altura da subárvore esquerda e a altura da subárvore direita.
 
 #### Rotações
 
-- `No* rotacaoEsquerda(No *r)`: Realiza uma rotação à esquerda no nó 'r'.
+* `No* rotacaoEsquerda(No *r)`: Realiza uma rotação à esquerda no nó 'r'.
 
-- `No* rotacaoDireita(No *r)`: Realiza uma rotação à direita no nó 'r'.
+* `No* rotacaoDireita(No *r)`: Realiza uma rotação à direita no nó 'r'.
 
-- `No* rotacaoEsquerdaDireita(No *r)`: Realiza uma rotação à esquerda seguida de uma rotação à direita no nó 'r'.
+* `No* rotacaoEsquerdaDireita(No *r)`: Realiza uma rotação à esquerda seguida de uma rotação à direita no nó 'r'.
 
-- `No* rotacaoDireitaEsquerda(No *r)`: Realiza uma rotação à direita seguida de uma rotação à esquerda no nó 'r'.
+* `No* rotacaoDireitaEsquerda(No *r)`: Realiza uma rotação à direita seguida de uma rotação à esquerda no nó 'r'.
 
 Essas rotações são usadas para manter o balanceamento da árvore AVL após uma inserção ou remoção.
 
-#### `No* balancear(No *raiz)`
-
+* `No* balancear(No *raiz)`
 Esta função realiza o balanceamento da árvore após uma inserção ou remoção, garantindo que ela continue sendo uma árvore AVL.
 
-#### `No* inserirAVL(No *raiz, string palavra, int frequencia)`
-
+* `No* inserirAVL(No *raiz, string palavra, int frequencia)`
 Inserção de um novo nó na árvore AVL. A função decide se a inserção será à esquerda ou à direita com base na frequência e, se necessário, realiza o balanceamento da árvore.
 
-#### `void imprimeEmOrdem(No* raiz, std::ofstream &print)`
-
+*`void imprimeEmOrdem(No* raiz, std::ofstream &print)`
 Esta função realiza um percurso in-order na árvore AVL, imprimindo os nós em ordem crescente com base nas frequências. Para cada nó, imprime a palavra e sua frequência.
 
 ### Custo Computacional
@@ -422,20 +414,16 @@ Abaixo estão as funções que foram implementadas para manipular a árvore de H
 
 ### Funções Implementadas
 
-#### `bool compareNodes(HuffmanNode* a, HuffmanNode* b)`
-
+* `bool compareNodes(HuffmanNode* a, HuffmanNode* b)`
 Esta função é usada para comparar os nós da árvore de Huffman com base em suas frequências. É essencial para manter um min-heap durante a construção da árvore de Huffman. Os nós com menor frequência devem ter prioridade.
 
-#### `HuffmanNode* buildHuffmanTree(Heap* heap)`
-
+* `HuffmanNode* buildHuffmanTree(Heap* heap)`
 Esta função constrói a árvore de Huffman a partir de um min-heap de nós iniciais, representando cada palavra e sua frequência. Ela combina os nós do min-heap até que reste apenas um nó raiz, que é a árvore de Huffman completa.
 
-#### `void printHuffmanTree(HuffmanNode* root, std::ofstream& print)`
-
+* `void printHuffmanTree(HuffmanNode* root, std::ofstream& print)`
 Esta função imprime a árvore de Huffman em ordem. Para cada nó, verifica se ele é uma folha (representando uma palavra) e, se for o caso, imprime a palavra e sua frequência.
 
-#### `void destroyHuffmanTree(HuffmanNode* root)`
-
+* `void destroyHuffmanTree(HuffmanNode* root)`
 Esta função é usada para liberar a memória alocada para a árvore de Huffman. Ela percorre a árvore em pós-ordem, liberando os nós e as palavras.
 
 ### Custo Computacional
