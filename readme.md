@@ -12,11 +12,13 @@ Como mencionado, este algoritmo ainda não implementa um sistema de autocompleta
 
 ## ENTRADAS
 
-A entrada consiste de uma sequência de arquivos de texto nomeados de "input.txt" mais um arquivo de stopwords nomeado "stopwords.txt" que apresenta as palavras que devem ser desconsideradas pelo algoritmo na implementação da solução e um arquivo "palavras.txt" com uma lista de palavras que serão utilizadas como "entrada do usuário", ou seja, serão as palavras que devemos buscar as semelhanças nos textos de input para montar as árvores e apresentar ao usuário. Para cada palavra desse arquivo, uma heap sera criada em relação a cada texto de 'input.txt' e para cada heap 3 árvores serão construidas: binária, AVL e Huffman.
+A entrada consiste de uma sequência de arquivos de texto nomeados de "input.txt", um arquivo de stopwords nomeado "stopwords.txt", que apresenta as palavras que devem ser desconsideradas pelo algoritmo na implementação da solução, e um arquivo "palavras.txt", com uma lista de palavras que serão utilizadas como "entrada do usuário", ou seja, serão as palavras que devemos buscar as semelhanças nos textos de input para montar as árvores e apresentar ao usuário. 
 
-Os arquivos de texto do tipo "input.txt" devem seguir um padrão de nomenclatura. Para garantir que a leitura dos arquivos ocorram corretamente.
+Para cada palavra desse arquivo, uma heap será criada em relação a cada texto de `input.txt` e para cada heap 3 árvores serão construidas: binária, AVL e Huffman.
 
-`Exemplo`: quantidade de entradas(fora stopwords) = 2 - arquivos de entrada serão: "input0.txt" e "inputq.txt".
+Os arquivos de texto do tipo `input.txt` devem seguir um padrão de nomenclatura. Para garantir que a leitura dos arquivos ocorram corretamente.
+
+`Exemplo`: quantidade de entradas(fora stopwords) = 2 - arquivos de entrada serão: "input0.txt" e "input1.txt".
 
 No repositório do projeto encontra-se os dois textos utilizados para testes:
 ["input0.txt"](dataset/input0.txt) e ["input1.txt"](dataset/input1.txt)
@@ -38,7 +40,7 @@ A implementação pode ser descrita pelas seguintes etapas:
 
 Após obter as entradas e montar a hash para cada texto as seguintes operações são realizadas:
 
-Para cada palavra, montar a heap em relação a cada texto e criar cada uma das 3 árvores para cada heap diferente. 
+* Para cada palavra, montar a heap em relação a cada texto e criar cada uma das 3 árvores para cada heap diferente. 
 
 Uma esquematização para essa parte pode ser expressa como:
 
@@ -51,13 +53,20 @@ Para cada palavra lida de palavras.txt:
             - Imprimir as árvores no arquivo de saída
             
 ``````
-A função `run()` é chamada na função `main()` e é responsável por iniciar o algoritmo.
+Essa respresentação aponta um pseudo-código para o loop principal de operações do algoritmo.
+
+Uma visão geral foi apresentada, mas, a seguir, consta uma explicação detalhada sobre cada estrutura utilizada, bem como sua análise assintótica.
 
 ## Leitura e Tratamento das Entradas
+
+A função `run()` é chamada na função `main()` e é responsável por iniciar a execução do algoritmo.
+
 Para ler os arquivos de entrada, foram implementadas as funções: 
  - `readWords()`: realiza a leitura das palavras que irão relacionar as árvores.
- - `readStopWords()`: realiza a leitura das stopwords.A função `run()` é chamada na função `main()` e é responsável por iniciar o algoritmo.
- - `obterHash()`: realiza a leitura de cada texto e armazena em um `std::vector` de `std::unordered_map`.
+ - `readStopWords()`: realiza a leitura das stopwords. 
+ - `obterHash()`: realiza a leitura dos textos e armazena as palavras e frequências de cada um em um `std::vector` de `std::unordered_map`.
+
+Essas funções são chamadas na função `run()` e são utilizadas da seguinte forma:
 
 ```cpp
     //obter as palavras que irão ser trabalhadas
@@ -76,14 +85,14 @@ Para ler os arquivos de entrada, foram implementadas as funções:
 
 Todas essas funções de leitura utilizam a biblioteca `<fstream>` para manipulação dos arquivos.
 
- As palavras são tratadas com as funções:
+ As palavras lidas são tratadas com as funções:
 
 - `removePunctuation()`: remove as pontuações das strings lidas.
 - `lowerString()`: converte os caracteres da palavra para minúsculo.
 
 Alguns caracteres precisam de tratamentos específicos, mas a estratégia utilizada como solução é substituir sempre os caracteres indesejados por caracteres de espaço,como mostra a função a seguir:
 
-```cpp
+``` cpp
 
 string removePunctuation(string word) {
     
@@ -115,7 +124,7 @@ string removePunctuation(string word) {
 }
 
 ```
-## O Uso do `std::unordered_map`
+## Hash `std::unordered_map` 
 
 Após formatar as palavras, cada uma é inserida em um `unordered_map`.
 
@@ -197,7 +206,9 @@ A seguir uma representação de uma tabela hash em que as chaves(no caso nomes) 
 <p style="text-align: justify">Vale ressaltar que uma estrutura de hash é uma ótima escolha para contagem de palavras por ter um custo de acesso constante O(1). Utilizar uma estrutura como um vetor convencional afetaria significativamente o custo do algoritmo por ser necessário percorrer todo o vetor para fazer buscas e ajustes nos dados armazenados.<p\>
 
 ## Trabalhando com cada palavra
-A função `workWithEachWord()` realiza cria a heap e as árvores correspondesntes para cada palavra e imprime os resultados no arquivo de saída.
+A função `workWithEachWord()` também é chamada na função `run()`. 
+
+Essa função apresenta o loop principal de operações do algoritmo. Nela, a heap e as árvores correspondesntes para cada palavra são criadas e  os resultados no arquivo de saída são impressos.
 
 O trecho de código abaixo mostra como:
 
@@ -331,7 +342,7 @@ for(int i=0;i<palavras.size();i++){
 ```
 
 ## Árvores
-As árvores utilizadas nesse trabalho foram construídas a partir do resultado que a heap apresentou quando aplicada em relação à análise de uma palavra do vetor `palavras` em relação a um dos textos.
+As árvores utilizadas nesse trabalho foram construídas a partir do resultado obtido pela heap na iteração corrente do loop principal, ou seja em relação à análise de uma palavra do vetor `palavras` em comparação a um dos textos.
 Vale ressaltar que as árvores utilizadas foram:
 `Árvore Binária de Busca`, `Árvore AVL` e `Árvore de Huffman`.
 As propriedades de cada uma delas e seu comportamento assintótico são especificados a seguir.
@@ -362,6 +373,11 @@ Esta função realiza um percurso na árvore binária, chamado de **in-order tra
 ## Árvore AVL
 
 Uma **árvore AVL** é uma variação da árvore binária de busca que mantém o balanceamento automático da árvore, garantindo que a diferença de altura entre as subárvores esquerda e direita de qualquer nó (fator de balanceamento) seja no máximo 1. Isso resulta em um desempenho de busca eficiente, independentemente da ordem de inserção dos elementos.
+
+A imagem abaixo mostra um exemplo de árvore AVL e mostra a diferença de altura máxima em 1:
+
+<img src="imagem/avl.png" alt="avltree" style="max-width: 50%; height: auto;">
+
 
 ### Funções Implementadas
 
@@ -435,7 +451,7 @@ Esta função é usada para liberar a memória alocada para a árvore de Huffman
 - A função `destroyHuffmanTree()` também percorre todos os nós da árvore uma vez, resultando em um custo computacional de O(n), onde 'n' é o número de nós na árvore.
 
 
-# Saída e Análise de Resultado
+# SAÍDA E ANÁLISE DE RESULTADO
 
 A saída consiste em um arquivo `output.txt` que é gerado após a execução do algoritmo.
 Esse arquivo apresenta cada uma das 3 árvores relativas a cada palavra em relação a cada texto de input. 
@@ -543,9 +559,13 @@ Como a palavra não está presente no texto, as árvores não são impressas.
 
 Como apresentado, as árvores apresentam resultados diferentes devido aos seus critérios de implementação distintos.
 
+## Observação
+A saída foi limitada à analise de somente duas palavras para evitar a exibição de um arquivo muito grande. 
+
+
 # CONCLUSÃO
 
-Como foi apresentado estruturas básicas utilizadas na implementação foram a hash (unordered_map), a heap e as árvores: Binária, AVL e Huffman.
+Como foi apresentado, estruturas básicas utilizadas na implementação foram a hash (unordered_map), a heap e as árvores: Binária, AVL e Huffman.
 
 Como foi mostrado no trabalho anterior, a combinação da hash e da heap para a extração dos elementos mais frequentes em um texto é uma estratégia altamente eficiente pelo custo assintótico logarítmico (`O(n log k)`) de operações na heap. Lembrando que k é o número que representa a quantidade de elementos mais frequentes da qual desejamos obter. Além disso,a hash apresenta uma forma excelente de contagem das palavras.
 
@@ -571,7 +591,7 @@ Portanto, esta implementação consiste em uma base de estruturas para a constru
 
 Você pode usar essa tabela diretamente 
 
-# Compilação e execução
+# COMPILAÇÃO E EXECUÇÃO
 
 | Comando          | Função                           |
 | -----------------| -------------------------------- |
@@ -581,7 +601,7 @@ Você pode usar essa tabela diretamente
 
 
 
-# Especificações
+# ESPECIFICAÇÕES
 
 | Componentes            | Detalhes                                                                                         |
 | -----------------------| -----------------------------------------------------------------------------------------------  |
@@ -592,7 +612,7 @@ Você pode usar essa tabela diretamente
 |`Compilador`| GCC - g++ (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0  |
 
 
-# Referências
+# REFERÊNCIAS
 
 
 GeeksforGeeks. Difference between Min Heap and Max Heap. Disponível em: https://www.geeksforgeeks.org/difference-between-min-heap-and-max-heap/.
@@ -605,7 +625,7 @@ GeeksforGeeks. Binary Heap. Disponível em: https://www.geeksforgeeks.org/binary
 
 Gaspar, W. Como imprimir uma árvore binária balanceada (árvore AVL). Disponível em: https://wagnergaspar.com/como-imprimir-uma-arvore-binaria-balanceada-arvore-avl/. 
 
-# Autor
+# AUTOR
 
 Emanuel Vieira Tavares | Engenharia da Computação ~ CEFET-MG
 
