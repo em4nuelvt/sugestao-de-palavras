@@ -412,7 +412,7 @@ Esta função realiza o balanceamento da árvore após uma inserção ou remoç�
 * `No* inserirAVL(No *raiz, string palavra, int frequencia)`
 Inserção de um novo nó na árvore AVL. A função decide se a inserção será à esquerda ou à direita com base na frequência e, se necessário, realiza o balanceamento da árvore.
 
-*`void imprimeEmOrdem(No* raiz, std::ofstream &print)`
+* `void imprimeEmOrdem(No* raiz, std::ofstream &print)`
 Esta função realiza um percurso in-order na árvore AVL, imprimindo os nós em ordem crescente com base nas frequências. Para cada nó, imprime a palavra e sua frequência.
 
 ### Custo Computacional
